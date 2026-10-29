@@ -8,7 +8,10 @@ export abstract class ServiceBase {
 
   protected async findSession(token?: string | null) {
     if (!token) return null;
-    const session = await this.repository.findOne("sessions", { token, expires_at: { $gt: new Date() } });
+    const session = await this.repository.findOne("sessions", {
+      token,
+      expires_at: { $gt: new Date() },
+    });
     return session;
   }
 
@@ -19,13 +22,18 @@ export abstract class ServiceBase {
   }
 
   protected async getRole(clubId: string, userId: string) {
-    const membership = await this.repository.findOne("club_memberships", { club_id: clubId, user_id: userId });
+    const membership = await this.repository.findOne("club_memberships", {
+      club_id: clubId,
+      user_id: userId,
+    });
     return membership ? String(membership.role) : undefined;
   }
 
   protected async canWrite(clubId: string, userId: string, table: string) {
     const role = await this.getRole(clubId, userId);
-    const accepted = ["financial_transactions", "membership_fees"].includes(table)
+    const accepted = ["financial_transactions", "membership_fees"].includes(
+      table,
+    )
       ? ["owner", "admin", "finance"]
       : ["clubs", "club_memberships"].includes(table)
         ? ["owner", "admin"]
@@ -39,7 +47,11 @@ export function plain(value: unknown): unknown {
   if (value instanceof Date) return value.toISOString();
   if (value && typeof value === "object") {
     const source = value as Document;
-    return Object.fromEntries(Object.entries(source).filter(([key]) => key !== "_id").map(([key, item]) => [key, plain(item)]));
+    return Object.fromEntries(
+      Object.entries(source)
+        .filter(([key]) => key !== "_id")
+        .map(([key, item]) => [key, plain(item)]),
+    );
   }
   return value;
 }

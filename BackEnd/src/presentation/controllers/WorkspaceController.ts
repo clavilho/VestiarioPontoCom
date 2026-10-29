@@ -7,20 +7,46 @@ export class WorkspaceController {
   get = async (request: Request, response: Response) => {
     try {
       const auth = request.header("authorization") ?? "";
-      const token = auth.toLowerCase().startsWith("bearer ") ? auth.slice(7) : undefined;
+      const token = auth.toLowerCase().startsWith("bearer ")
+        ? auth.slice(7)
+        : undefined;
       response.json(await this.service.getWorkspace(token));
     } catch (error) {
-      response.status(400).json({ data: null, error: { message: error instanceof DomainError ? error.message : "Falha ao processar a solicitação." } });
+      response
+        .status(400)
+        .json({
+          data: null,
+          error: {
+            message:
+              error instanceof DomainError
+                ? error.message
+                : "Falha ao processar a solicitação.",
+          },
+        });
     }
   };
 
   getClub = async (request: Request, response: Response) => {
     try {
       const auth = request.header("authorization") ?? "";
-      const token = auth.toLowerCase().startsWith("bearer ") ? auth.slice(7) : undefined;
-      response.json(await this.service.getClub(String(request.params.clubId), token));
+      const token = auth.toLowerCase().startsWith("bearer ")
+        ? auth.slice(7)
+        : undefined;
+      response.json(
+        await this.service.getClub(String(request.params.clubId), token),
+      );
     } catch (error) {
-      response.status(400).json({ data: null, error: { message: error instanceof DomainError ? error.message : "Falha ao processar a solicitação." } });
+      response
+        .status(400)
+        .json({
+          data: null,
+          error: {
+            message:
+              error instanceof DomainError
+                ? error.message
+                : "Falha ao processar a solicitação.",
+          },
+        });
     }
   };
 }
