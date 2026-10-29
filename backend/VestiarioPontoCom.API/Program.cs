@@ -19,10 +19,17 @@ builder.Services.AddSingleton<IRpcService, MongoRpcService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+var configuredOrigins = builder.Configuration["Cors:AllowedOrigins"]?
+    .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+    ?? Array.Empty<string>();
+var frontendOrigins = configuredOrigins
+    .Concat(["http://localhost:5173", "http://localhost:3000"])
+    .Distinct(StringComparer.OrdinalIgnoreCase)
+    .ToArray();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("frontend", policy => policy
-        .WithOrigins("http://localhost:7288", "http://localhost:3000")
+        .WithOrigins(frontendOrigins)
         .AllowAnyHeader()
         .AllowAnyMethod());
 });

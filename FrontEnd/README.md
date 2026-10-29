@@ -34,6 +34,6 @@ Abra `http://localhost:5173`. Durante o desenvolvimento, o Vite encaminha `/api`
 
 A API usa `MONGODB_URI` e opcionalmente `MONGODB_DATABASE`; sem essas variáveis, conecta a `mongodb://127.0.0.1:27017` e usa o banco `vestiario`.
 
-Em produção, defina `VITE_API_URL` com a origem pública da API. Para login Google, configure `VITE_GOOGLE_CLIENT_ID` no frontend e `GOOGLE_CLIENT_ID` na API. A recuperação de senha por e-mail depende de SMTP configurado no backend.
+No Vercel, escolha `FrontEnd` como Root Directory. Em produção, defina `VITE_API_URL` com a origem pública da API. Na API, permita a origem pública do Vercel em `Cors__AllowedOrigins`. Para login Google, configure `VITE_GOOGLE_CLIENT_ID` no frontend e `GOOGLE_CLIENT_ID` na API. A recuperação de senha por e-mail depende de SMTP configurado no backend.
 
 Use `.env.example` como referência. Não coloque credenciais do MongoDB no frontend.

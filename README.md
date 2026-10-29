@@ -24,6 +24,6 @@ Sistema de gestão esportiva para clubes, com frontend React e API ASP.NET Core 
 3. Em outro terminal, na pasta `FrontEnd`, execute `npm run dev`.
 4. Abra o endereço do Vite, normalmente `http://localhost:5173`.
 
-O Vite encaminha as chamadas `/api` para `https://localhost:7288`. Para hospedagem, configure `VITE_API_URL` com a origem pública da API. Nunca coloque a string de conexão do MongoDB no frontend.
+O Vite encaminha as chamadas `/api` para `https://localhost:7288`. O frontend pode ser publicado no Vercel, definindo `FrontEnd` como Root Directory. Como o backend .NET é uma API separada, publique-o em um host compatível com .NET e configure `VITE_API_URL` com a origem pública da API. No ambiente da API, configure `Cors__AllowedOrigins` com a origem do site Vercel. Nunca coloque a string de conexão do MongoDB no frontend.
 
 Login Google requer `GOOGLE_CLIENT_ID` na API e `VITE_GOOGLE_CLIENT_ID` no frontend. Recuperação de senha por e-mail requer configurar SMTP na API.
