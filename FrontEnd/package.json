@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "dev:api": "dotnet run --project ../backend/VestiarioPontoCom.API/VestiarioPontoCom.API.csproj --launch-profile http",
+    "dev:api": "npm --prefix ../BackEnd run dev",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",

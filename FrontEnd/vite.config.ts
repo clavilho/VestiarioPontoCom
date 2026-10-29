@@ -14,6 +14,6 @@ export default defineConfig({
     viteReact(),
   ],
   server: {
-    proxy: { "/api": { target: "https://localhost:7288", changeOrigin: true, secure: false } },
+    proxy: { "/api": { target: "http://localhost:3001", changeOrigin: true } },
   },
 });

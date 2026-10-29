@@ -1,39 +1,36 @@
 # FrontEnd
 
-Frontend React do VestiarioPontoCom. O navegador chama a API ASP.NET Core pelos endpoints `/api`; a conexão MongoDB permanece no backend.
+Frontend React do VestiarioPontoCom. O navegador chama a API Node.js + TypeScript pelos endpoints `/api`; a conexão MongoDB permanece no backend.
 
 ## Requisitos
 
-- Node.js e npm
-- .NET SDK 8
+- Node.js 20 ou superior
 - MongoDB local ou MongoDB Atlas
 
 ## Executar localmente
 
-Na pasta `FrontEnd`, instale as dependências:
+Em um terminal, na raiz do repositório, instale as dependências do backend e inicie a API:
 
 ```powershell
+cd BackEnd
 npm install
-```
-
-Inicie a API em um terminal:
-
-```powershell
-npm run dev:api
-```
-
-Inicie o frontend em outro terminal:
-
-```powershell
 npm run dev
 ```
 
-Abra `http://localhost:5173`. Durante o desenvolvimento, o Vite encaminha `/api` para `https://localhost:7288`.
+Em outro terminal, na raiz do repositório, instale as dependências do frontend e inicie o Vite:
+
+```powershell
+cd FrontEnd
+npm install
+npm run dev
+```
+
+Abra `http://localhost:5173`. Durante o desenvolvimento, o Vite encaminha `/api` para `http://localhost:3001`.
 
 ## Configuração
 
-A API usa `MONGODB_URI` e opcionalmente `MONGODB_DATABASE`; sem essas variáveis, conecta a `mongodb://127.0.0.1:27017` e usa o banco `vestiario`.
+A API usa `MONGODB_URI` e opcionalmente `MONGODB_DATABASE`; sem essas variáveis, conecta a `mongodb://127.0.0.1:27017` e usa o banco `vestiario`. Consulte `BackEnd/.env.example`.
 
-No Vercel, escolha `FrontEnd` como Root Directory. Em produção, defina `VITE_API_URL` com a origem pública da API. Na API, permita a origem pública do Vercel em `Cors__AllowedOrigins`. Para login Google, configure `VITE_GOOGLE_CLIENT_ID` no frontend e `GOOGLE_CLIENT_ID` na API. A recuperação de senha por e-mail depende de SMTP configurado no backend.
+No Vercel, crie dois projetos ligados ao mesmo repositório: use `FrontEnd` como Root Directory do frontend e `BackEnd` como Root Directory da API. Configure `MONGODB_URI`, `MONGODB_DATABASE`, `GOOGLE_CLIENT_ID` e `CORS_ALLOWED_ORIGINS` no projeto da API. No frontend, configure `VITE_API_URL` com a origem pública da API e `VITE_GOOGLE_CLIENT_ID`. A recuperação de senha por e-mail depende de SMTP configurado no backend.
 
-Use `.env.example` como referência. Não coloque credenciais do MongoDB no frontend.
+Use `BackEnd/.env.example` e `FrontEnd/.env.example` como referência. Não coloque credenciais do MongoDB no frontend.

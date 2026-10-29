@@ -1,29 +1,26 @@
 # VestiarioPontoCom
 
-Sistema de gestão esportiva para clubes, com frontend React e API ASP.NET Core usando MongoDB.
+Sistema de gestão esportiva para clubes, com frontend React e API Node.js + TypeScript usando MongoDB.
 
 ## Estrutura
 
 - `FrontEnd/`: interface React e cliente HTTP que consome a API.
-- `backend/VestiarioPontoCom.API/`: API ASP.NET Core, controllers e Swagger.
-- `backend/Vestiario.Application/`: contratos e interfaces.
-- `backend/Vestiario.Domain/`: regras e conceitos de domínio.
-- `backend/Vestiario.Infrastructure/`: persistência e serviços MongoDB.
-- `backend/Vestiario.sln`: solução .NET.
+- `BackEnd/`: API Node.js + TypeScript, separada em Domain, Application, Infrastructure e Presentation.
+- `backendNet/`: implementação .NET anterior preservada como referência durante a migração.
 
 ## Requisitos
 
-- Node.js e npm
-- .NET SDK 8
+- Node.js 20 ou superior
+- npm
 - MongoDB local ou MongoDB Atlas
 
 ## Executar localmente
 
-1. Configure `MONGODB_URI` e, opcionalmente, `MONGODB_DATABASE` no ambiente da API. Sem configuração, a API usa `mongodb://127.0.0.1:27017` e o banco `vestiario`.
-2. Em um terminal, na pasta `FrontEnd`, execute `npm install` e depois `npm run dev:api`.
-3. Em outro terminal, na pasta `FrontEnd`, execute `npm run dev`.
+1. Em `BackEnd`, copie `.env.example` para `.env` e configure `MONGODB_URI` e `MONGODB_DATABASE`.
+2. Em um terminal, na pasta `BackEnd`, execute `npm install` e `npm run dev`.
+3. Em outro terminal, na pasta `FrontEnd`, execute `npm install` e `npm run dev`.
 4. Abra o endereço do Vite, normalmente `http://localhost:5173`.
 
-O Vite encaminha as chamadas `/api` para `https://localhost:7288`. O frontend pode ser publicado no Vercel, definindo `FrontEnd` como Root Directory. Como o backend .NET é uma API separada, publique-o em um host compatível com .NET e configure `VITE_API_URL` com a origem pública da API. No ambiente da API, configure `Cors__AllowedOrigins` com a origem do site Vercel. Nunca coloque a string de conexão do MongoDB no frontend.
+O Vite encaminha as chamadas `/api` para `http://localhost:3001`. Publique frontend e API como projetos Vercel separados ligados ao mesmo repositório: defina `FrontEnd` como Root Directory do frontend e `BackEnd` como Root Directory da API. Configure `VITE_API_URL` no frontend com a origem pública da API e `CORS_ALLOWED_ORIGINS` na API com a origem do frontend. Nunca coloque a string de conexão do MongoDB no frontend.
 
-Login Google requer `GOOGLE_CLIENT_ID` na API e `VITE_GOOGLE_CLIENT_ID` no frontend. Recuperação de senha por e-mail requer configurar SMTP na API.
+Login Google requer `GOOGLE_CLIENT_ID` na API e `VITE_GOOGLE_CLIENT_ID` no frontend. Recuperação de senha por e-mail continua dependendo de SMTP.
