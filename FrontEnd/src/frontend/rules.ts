@@ -1,0 +1,2 @@
+export function calculateFee(base:number,scholarship:'none'|'partial'|'full',discount:number){if(base<0||discount<0||discount>100)throw new Error('invalid_amount');return scholarship==='full'?0:scholarship==='partial'?Math.round(base*(1-discount/100)*100)/100:base}
+export function attendanceRate(statuses:string[]){const eligible=statuses.filter(s=>s!=='excluded');return eligible.length?Math.round(eligible.filter(s=>s==='present').length/eligible.length*100):0}

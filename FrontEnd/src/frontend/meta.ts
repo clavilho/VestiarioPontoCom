@@ -1,0 +1,1 @@
+export function pageHead(name:string){const title=name+' — Vestiário';const description=name+' na plataforma de gestão de clubes Vestiário.';return {meta:[{title},{name:'description',content:description},{property:'og:title',content:title},{property:'og:description',content:description},{property:'og:type',content:'website'},{name:'twitter:card',content:'summary_large_image'}]}}

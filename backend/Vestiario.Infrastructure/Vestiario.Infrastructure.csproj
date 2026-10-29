@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><TargetFramework>net8.0</TargetFramework><Nullable>enable</Nullable><ImplicitUsings>enable</ImplicitUsings></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Vestiario.Domain\Vestiario.Domain.csproj" />
+    <ProjectReference Include="..\Vestiario.Application\Vestiario.Application.csproj" />
+    <PackageReference Include="MongoDB.Driver" Version="3.13.0" />
+    <PackageReference Include="Google.Apis.Auth" Version="1.77.0" />
+  </ItemGroup>
+</Project>
